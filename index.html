@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgenticVulHunter — Research-derived secure code review</title>
+  <meta name="description" content="AgenticVulHunter is a staged, research-derived secure code review tool that combines diff localization, repository evidence, local CWE retrieval, and model-based validation." />
+  <meta name="theme-color" content="#08111f" />
+  <meta property="og:title" content="AgenticVulHunter" />
+  <meta property="og:description" content="Secure code review built from a staged research workflow." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/social-preview.png" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="AgenticVulHunter home">
+        <img src="assets/brand-mark.svg" alt="" width="42" height="42" />
+        <span>AgenticVulHunter</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#workflow">How it works</a>
+        <a href="#quickstart">Quick start</a>
+        <a href="https://github.com/awsm-research/AgenticBugHunter/tree/main/docs" target="_blank" rel="noreferrer">Docs</a>
+        <a class="nav-github" href="https://github.com/awsm-research/AgenticBugHunter" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-glow hero-glow-one"></div>
+        <div class="hero-glow hero-glow-two"></div>
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="pulse-dot"></span> Research → real tool</div>
+          <h1>Secure code review,<br /><span>built from research.</span></h1>
+          <p class="hero-lede">AgenticVulHunter starts from the diff, gathers repository evidence, retrieves CWE knowledge locally, and validates findings before it writes a review comment.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#quickstart">Get started <span>→</span></a>
+            <a class="button button-secondary" href="https://github.com/awsm-research/AgenticBugHunter" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.24c-3.23.7-3.91-1.37-3.91-1.37-.53-1.35-1.29-1.71-1.29-1.71-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.58-.29-5.29-1.29-5.29-5.73 0-1.27.45-2.3 1.19-3.11-.12-.29-.52-1.47.11-3.07 0 0 .97-.31 3.16 1.19a10.98 10.98 0 0 1 5.76 0C17.03 4.9 18 5.21 18 5.21c.63 1.6.23 2.78.11 3.07.74.81 1.19 1.84 1.19 3.11 0 4.45-2.72 5.43-5.3 5.72.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg>
+              View on GitHub
+            </a>
+          </div>
+          <div class="hero-points" aria-label="Key attributes">
+            <span><b>5</b> staged review steps</span>
+            <span><b>Local</b> BM25 security retrieval</span>
+            <span><b>Portable</b> model interface</span>
+          </div>
+        </div>
+
+        <div class="terminal-wrap reveal" aria-label="Example AgenticVulHunter review">
+          <div class="terminal-label">Example run</div>
+          <div class="terminal-window">
+            <div class="terminal-bar">
+              <div class="window-dots"><i></i><i></i><i></i></div>
+              <span>~/my-project</span>
+              <span class="terminal-status">review</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-command"><span>$</span> agenticbughunter review --base HEAD~1 --head HEAD</div>
+              <div class="ascii-logo">AGENTIC VUL HUNTER</div>
+              <div class="terminal-version">v0.6.0 · staged secure code review</div>
+              <div class="terminal-meta">
+                <div><span>Repository</span><b>/Users/you/my-project</b></div>
+                <div><span>Model</span><b>your-model</b></div>
+                <div><span>Policy</span><b>threshold 0.75 · candidates 5</b></div>
+              </div>
+              <div class="pipeline-list">
+                <div><span class="check">✓</span><b>1/5</b> Candidate localisation <em>done</em></div>
+                <div><span class="check">✓</span><b>2/5</b> Context enrichment <em>done</em></div>
+                <div><span class="check">✓</span><b>3/5</b> CWE hypothesis generation <em>done</em></div>
+                <div><span class="check">✓</span><b>4/5</b> Vulnerability validation <em>done</em></div>
+                <div><span class="check">✓</span><b>5/5</b> Finding filter & comments <em>done</em></div>
+              </div>
+              <div class="terminal-finish"><span>◆</span> Review complete</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Tool characteristics">
+        <div>Python 3.11+</div><i></i><div>Git-native</div><i></i><div>OpenAI-compatible</div><i></i><div>Anthropic</div><i></i><div>Gemini</div>
+      </section>
+
+      <section class="section section-light" id="features">
+        
+        <div class="section-heading reveal">
+          <div class="kicker">What it focuses on</div>
+          <h2>Secure code review.</h2>
+          <p>The tool does a stage code security review to detect vulnerability in the changed line and the codebase.</p>
+        </div>
+
+        <div class="feature-grid">
+
+          <article class="feature-card reveal">
+            <div class="icon icon-blue">⌁</div>
+            <h3>Diff-focused</h3>
+            <p>Starts from changed lines instead of asking the model to blindly scan the whole repository.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="icon icon-green">⌘</div>
+            <h3>Repository-aware</h3>
+            <p>Reads bounded context and resolves relevant code so a finding can be judged against real evidence.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="icon icon-amber">◎</div>
+            <h3>Local security retrieval</h3>
+            <p>Uses bundled CWE knowledge with BM25 retrieval. No separate retrieval or SAST server is required.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="icon icon-purple">◇</div>
+            <h3>Model-portable</h3>
+            <p>The stages work through a text interface, not vendor-specific function calling. Bring a supported model endpoint.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section workflow-section" id="workflow">
+        <div class="section-heading centered reveal">
+          <div class="kicker dark-kicker">The pipeline</div>
+          <h2>Five stages, with a clear job for each one.</h2>
+          <p>Model reasoning is used where interpretation helps. Python keeps locations, limits, scores, and final filtering under application control.</p>
+        </div>
+        <div class="workflow-grid">
+          <article class="workflow-card reveal"><span>01</span><h3>Candidate localisation</h3><p>Select suspicious changed lines from the Git diff.</p></article>
+          <article class="workflow-card reveal"><span>02</span><h3>Context enrichment</h3><p>Gather bounded repository context and relevant symbols.</p></article>
+          <article class="workflow-card reveal"><span>03</span><h3>CWE hypotheses</h3><p>Retrieve local security knowledge and form candidate hypotheses.</p></article>
+          <article class="workflow-card reveal"><span>04</span><h3>Validation</h3><p>Judge each candidate–CWE pair against evidence-based criteria.</p></article>
+          <article class="workflow-card reveal"><span>05</span><h3>Filter & comments</h3><p>Apply the threshold and emit supported review comments.</p></article>
+        </div>
+      </section>
+
+      <section class="section section-light model-section" id="models">
+        <div class="split-layout">
+          <div class="split-copy reveal">
+            <div class="kicker">Use your model</div>
+            <h2>Configuration stays in the project.</h2>
+            <p>Run <code>agenticbughunter init --no-hook</code>, then configure the model in <code>.agenticbughunter.toml</code>. Environment variables are available when you need overrides for CI or secrets.</p>
+            <div class="provider-row">
+              <span>OpenAI-compatible</span><span>Anthropic</span><span>Gemini</span><span>Custom Python backend</span>
+            </div>
+            <a class="text-link" href="https://github.com/awsm-research/AgenticBugHunter/blob/main/docs/models.md" target="_blank" rel="noreferrer">Model setup →</a>
+          </div>
+          <div class="code-card reveal">
+            <div class="code-card-top"><span>.agenticbughunter.toml</span><button class="copy-button" data-copy-target="toml-code">Copy</button></div>
+            <pre id="toml-code"><code><span class="code-dim">[llm]</span>
+provider = <span class="code-string">"openai"</span>
+base_url = <span class="code-string">"http://localhost:11435/v1"</span>
+model = <span class="code-string">"qwen3-coder:30b"</span>
+api_key = <span class="code-string">"ollama"</span>
+
+<span class="code-dim">[pipeline]</span>
+confidence_threshold = <span class="code-number">0.75</span>
+max_candidates = <span class="code-number">5</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quickstart-section" id="quickstart">
+        <div class="quickstart-shell">
+          <div class="section-heading reveal">
+            <div class="kicker dark-kicker">Quick start</div>
+            <h2>Install once. Run it in any Git project.</h2>
+          </div>
+          <div class="steps-list reveal">
+            <div class="install-step">
+              <span class="step-number">1</span>
+              <div><h3>Install from GitHub</h3><div class="command-line"><code id="install-code">pipx install "git+https://github.com/awsm-research/AgenticBugHunter.git"</code><button class="copy-button" data-copy-target="install-code">Copy</button></div></div>
+            </div>
+            <div class="install-step">
+              <span class="step-number">2</span>
+              <div><h3>Set up your repository</h3><div class="command-line"><code id="init-code">agenticbughunter init --no-hook</code><button class="copy-button" data-copy-target="init-code">Copy</button></div></div>
+            </div>
+            <div class="install-step">
+              <span class="step-number">3</span>
+              <div><h3>Check the model connection</h3><div class="command-line"><code id="doctor-code">agenticbughunter doctor --check-llm</code><button class="copy-button" data-copy-target="doctor-code">Copy</button></div></div>
+            </div>
+            <div class="install-step">
+              <span class="step-number">4</span>
+              <div><h3>Review the latest commit</h3><div class="command-line"><code id="review-code">agenticbughunter review --base HEAD~1 --head HEAD</code><button class="copy-button" data-copy-target="review-code">Copy</button></div></div>
+            </div>
+          </div>
+          <div class="quickstart-note reveal">The model/server must already be running. <code>--no-hook</code> keeps your normal <code>git push</code> workflow unchanged.</div>
+        </div>
+      </section>
+
+      <section class="section section-light preview-section">
+        <div class="preview-copy reveal">
+          <div class="kicker">Made for real repositories</div>
+          <h2>Readable in the terminal, traceable on disk.</h2>
+          <p>Each run writes artifacts under <code>.agenticbughunter/runs/&lt;run-id&gt;/</code>, including configuration, prompt hashes, model text, retrieval results, judgments, and final comments.</p>
+          <div class="preview-links">
+            <a class="text-link" href="https://github.com/awsm-research/AgenticBugHunter/blob/main/docs/operations.md" target="_blank" rel="noreferrer">Operations →</a>
+            <a class="text-link" href="https://github.com/awsm-research/AgenticBugHunter/blob/main/docs/research.md" target="_blank" rel="noreferrer">Research mapping →</a>
+          </div>
+        </div>
+        <div class="preview-image-wrap reveal">
+          <img src="assets/review-preview.png" alt="Illustrative AgenticVulHunter terminal review preview" loading="lazy" />
+        </div>
+      </section>
+
+      <section class="section research-section">
+        <div class="research-panel reveal">
+          <div>
+            <div class="kicker dark-kicker">Research-derived, not research theatre</div>
+            <h2>The tool keeps the method visible.</h2>
+            <p>The application and benchmark harness are related implementations, not interchangeable experiments. The repository documents what is preserved, what changed for real-world use, and what has actually been validated.</p>
+          </div>
+          <div class="research-actions">
+            <a class="button button-light" href="https://github.com/awsm-research/AgenticBugHunter/blob/main/docs/research.md" target="_blank" rel="noreferrer">Read the research mapping</a>
+            <a class="button button-ghost" href="https://github.com/awsm-research/AgenticBugHunter/blob/main/VALIDATION.md" target="_blank" rel="noreferrer">Validation notes</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand"><img src="assets/brand-mark.svg" alt="" width="38" height="38" /><div><strong>AgenticVulHunter</strong><span>Research-derived secure code review.</span></div></div>
+      <div class="footer-links">
+        <a href="https://github.com/awsm-research/AgenticBugHunter" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/awsm-research/AgenticBugHunter/tree/main/docs" target="_blank" rel="noreferrer">Docs</a>
+        <a href="https://github.com/awsm-research/AgenticBugHunter/issues" target="_blank" rel="noreferrer">Issues</a>
+      </div>
+      <div class="footer-note">Built for secure code review.</div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
