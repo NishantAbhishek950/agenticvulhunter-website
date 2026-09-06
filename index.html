@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AgenticVulHunter — AI-powered secure code review</title>
-  <meta name="description" content="AgenticVulHunter reviews code changes with repository context, local CWE retrieval, staged validation, and your choice of supported AI model." />
+  <meta name="description" content="AgenticVulHunter performs staged secure code review with repository-aware evidence, adaptive CWE retrieval, validation, and flexible local or hosted model backends." />
   <meta name="theme-color" content="#0b0b0b" />
   <meta property="og:title" content="AgenticVulHunter" />
   <meta property="og:description" content="Security review that starts from the diff, gathers evidence, and validates findings before surfacing them." />
@@ -81,18 +81,18 @@
           <div class="visual-shell">
             <div class="visual-topbar">
               <div class="dots"><i></i><i></i><i></i></div>
-              <span>review / checkout-service</span>
+              <span>review / account-service</span>
               <div class="live-pill"><i></i> analyzing</div>
             </div>
 
             <div class="visual-main">
               <div class="code-panel">
-                <div class="file-tab">payment.py</div>
-                <div class="code-row dim"><span class="ln">41</span><span>def apply_coupon(user, coupon):</span></div>
-                <div class="code-row"><span class="ln">42</span><span class="kw">if</span><span> coupon.active:</span></div>
-                <div class="code-row danger"><span class="ln">43</span><span>discount = coupon.value</span><b class="risk-dot"></b></div>
-                <div class="code-row"><span class="ln">44</span><span>order.total -= discount</span></div>
-                <div class="code-row dim"><span class="ln">45</span><span>return order</span></div>
+                <div class="file-tab">users.py</div>
+                <div class="code-row dim"><span class="ln">41</span><span>def delete_user(request, user_id):</span></div>
+                <div class="code-row"><span class="ln">42</span><span>user = get_user(user_id)</span></div>
+                <div class="code-row danger"><span class="ln">43</span><span>delete(user)</span><b class="risk-dot"></b></div>
+                <div class="code-row"><span class="ln">44</span><span>return {"status": "deleted"}</span></div>
+                <div class="code-row dim"><span class="ln">45</span><span># no authorization guard</span></div>
                 <div class="scan-line"></div>
               </div>
 
@@ -143,68 +143,83 @@
     </section>
 
     <section class="section intro-section" id="benefits">
-      <div class="section-head reveal">
-        <div class="eyebrow">Why AgenticVulHunter</div>
-        <h2>Not another prompt over a diff.</h2>
-        <p>
-          The tool breaks security review into explicit stages so the model can reason,
-          while the application keeps locations, limits, retrieval, scoring, and filtering under control.
-        </p>
+    <div class="section-head reveal">
+      <div class="eyebrow">Why AgenticVulHunter</div>
+
+    <h2>Secure code review, your model, your environment.</h2>
+
+    <p>
+      Vulnerabilities are not always isolated to one line of code.
+      AgenticVulHunter analyzes repository-level context and can run with
+      local models or supported API providers, depending on your setup.
+    </p>
+
+      <ul class="challenge-list">
+        <li>Vulnerable logic can span multiple files and functions.</li>
+        <li>Source code may be sensitive and unsuitable for external model providers.</li>
+        <li>Too much repository context can introduce noise.</li>
+        <li>Large amounts of security knowledge can distract the model from the relevant CWE.</li>
+      </ul>
+    </div>
+      <div class="solution-head reveal">
+        <div>
+          <div class="eyebrow">How AgenticVulHunter responds</div>
+          <h2>Focused evidence, adaptive security knowledge, then validation.</h2>
+        </div>
       </div>
 
       <div class="bento-grid">
         <article class="bento-card bento-large card-black reveal">
-          <div class="card-tag">Model portable</div>
-          <h3>Use the model endpoint that fits your setup.</h3>
+          <div class="card-tag">Local when you need it</div>
+          <h3>Keep model choice and code location under your control.</h3>
           <p>
-            Connect an OpenAI-compatible endpoint, Anthropic, Gemini, or a custom Python backend.
-            The review pipeline is not tied to a single model vendor or a vendor-specific tool-call format.
+            Run with a locally deployed open-source model or point the tool at a supported hosted endpoint.
           </p>
-          <div class="provider-stack" aria-label="Supported provider types">
-            <span>OpenAI-compatible</span>
-            <span>Anthropic</span>
-            <span>Gemini</span>
+          <div class="provider-stack" aria-label="Supported model deployment choices">
+            <span>Local LLM</span>
+            <span>Private endpoint</span>
+            <span>Hosted API</span>
             <span>Custom backend</span>
           </div>
           <div class="model-orbit" aria-hidden="true">
             <div class="orbit orbit-one"><i></i></div>
             <div class="orbit orbit-two"><i></i></div>
-            <div class="model-core">API</div>
+            <div class="model-core">LLM</div>
           </div>
         </article>
 
         <article class="bento-card card-yellow reveal">
-          <div class="card-tag dark">Evidence first</div>
-          <h3>Context before comments.</h3>
-          <p>Changed lines are enriched with bounded repository evidence before a finding is validated.</p>
+          <div class="card-tag dark">Adaptive retrieval</div>
+          <h3>Retrieve the security knowledge that matters.</h3>
+          <p>Each candidate drives a focused BM25 query for relevant CWE knowledge instead of loading everything into the model at once.</p>
           <div class="mini-diagram">
-            <span>diff</span><b>→</b><span>context</span><b>→</b><span>judge</span>
+            <span>candidate</span><b>→</b><span>query</span><b>→</b><span>CWE</span>
           </div>
         </article>
 
         <article class="bento-card reveal">
           <div class="card-icon">⌖</div>
-          <h3>Focused on what changed</h3>
-          <p>Start from the Git diff rather than sending the entire repository blindly to a model.</p>
+          <h3>Repository-aware evidence</h3>
+          <p>Enrichment follows the candidate into relevant functions and records source, sink, security guard, risk pattern, and unresolved facts.</p>
         </article>
 
         <article class="bento-card reveal">
-          <div class="card-icon">◎</div>
-          <h3>Local security knowledge</h3>
-          <p>Bundled CWE knowledge is retrieved locally with BM25. No separate retrieval server is required.</p>
+          <div class="card-icon">✓</div>
+          <h3>Validate before commenting</h3>
+          <p>Candidate–CWE pairs are checked for CWE fit, source-to-sink connection, diff causality, security controls, and concrete impact.</p>
         </article>
 
         <article class="bento-card bento-wide card-soft reveal">
           <div>
-            <div class="card-tag">Built for review workflows</div>
-            <h3>Manual review, JSON output, or a CI gate.</h3>
-            <p>Run it when you want, inspect machine-readable results, or opt into a pre-push gate later.</p>
+            <div class="card-tag">Pre-commit by design</div>
+            <h3>Start from the change. Finish with a supported finding.</h3>
+            <p>AgenticVulHunter anchors review to the Git diff, gathers focused context, retrieves CWE knowledge, validates the hypothesis, and filters the final result.</p>
           </div>
           <div class="workflow-pills">
-            <span><i>1</i> review</span>
-            <span><i>2</i> JSON</span>
-            <span><i>3</i> gate</span>
-            <span><i>4</i> artifacts</span>
+            <span><i>1</i> Diff</span>
+            <span><i>2</i> Context</span>
+            <span><i>3</i> Retrieve</span>
+            <span><i>4</i> Validate</span>
           </div>
         </article>
       </div>
@@ -286,6 +301,26 @@ max_candidates = <span class="syntax-number">5</span></code></pre>
           <h3>Filter</h3>
           <p>Apply the threshold and emit supported comments.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section evaluation-section" id="evaluation">
+      <div class="evaluation-shell reveal">
+        <div class="evaluation-copy">
+          <div class="eyebrow yellow-eyebrow">Evaluation snapshot</div>
+          <h2>Measured on pre-commit vulnerability review.</h2>
+          <p>
+            On 144 SCRBench vulnerability cases using Qwen-Coder 30B, the current evaluation reports the following results.
+            These numbers are benchmark-specific and can vary with the model and dataset.
+          </p>
+        </div>
+        <div class="metric-grid" aria-label="SCRBench evaluation metrics">
+          <div class="metric-card"><strong>38.4%</strong><span>Code Review Capability</span></div>
+          <div class="metric-card"><strong>36.4%</strong><span>Location Match</span></div>
+          <div class="metric-card"><strong>57.6%</strong><span>Type Match</span></div>
+          <div class="metric-card"><strong>56.3%</strong><span>Comment Relevance</span></div>
+          <div class="metric-card"><strong>42.1%</strong><span>Suggestion Quality</span></div>
+        </div>
       </div>
     </section>
 
