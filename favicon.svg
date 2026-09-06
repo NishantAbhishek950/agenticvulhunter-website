@@ -1,9 +1,6 @@
-<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="1" y="1" width="70" height="70" rx="22" fill="#0B1220" stroke="#26364F"/>
-  <path d="M36 13L55 20.5V34.5C55 46 47.2 56 36 60C24.8 56 17 46 17 34.5V20.5L36 13Z" fill="url(#g)" fill-opacity=".16" stroke="url(#g)" stroke-width="2.6"/>
-  <circle cx="36" cy="35" r="10" stroke="#67A7FF" stroke-width="2.6"/>
-  <circle cx="36" cy="35" r="3.3" fill="#A78BFA"/>
-  <path d="M36 20V25M36 45V50M21 35H26M46 35H51" stroke="#A78BFA" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M29.5 31L25.5 35L29.5 39M42.5 31L46.5 35L42.5 39" stroke="#8CC4FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <defs><linearGradient id="g" x1="17" y1="13" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#3B82F6"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="#FFD400"/>
+  <path d="M32 10L50 16.5V29.5C50 42 42.5 52 32 56C21.5 52 14 42 14 29.5V16.5L32 10Z" fill="#0B0B0B"/>
+  <circle cx="32" cy="30" r="9" stroke="#FFD400" stroke-width="3"/>
+  <circle cx="32" cy="30" r="2.6" fill="#FFD400"/>
 </svg>
